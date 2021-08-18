@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1{
+            width: 150px;
+            height: 150px;
+            background-color: #bfa;
+            position: absolute;
+            left: 810px;
+            top: 210px;
+        }
+        #btn3{
+            display:inline-block;
+        }
+        #btn4{
+            display:inline-block;
+        }
+        img{
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <input id="inp">
+    <div id="box1" ></div>
+    <script type="text/javascript">
+        var box1 = document.getElementById("box1");
+        var speed = 0;
+        var dir = 0;
+        function getStyle(obj,name){
+            if(window.getComputedStyle){
+                return getComputedStyle(obj,null)[name];
+            }else{
+                return obj.currentStyle[name];
+            }
+        }
+        setInterval(function(){
+            switch(dir){
+            case 37:
+                inp.value = "不允许输入数字";
+                var left = parseInt(getStyle(box1,"left"));
+                var newleft = left - speed;
+                if(newleft <= 60){
+                    newleft = 60;
+                    inp.value = "碰壁了！！";
+                }
+                box1.style.left = newleft + "px";
+                break;
+            case 38:
+                inp.value = "不允许输入数字";
+                var top = parseInt(getStyle(box1,"top"));
+                var newtop = top - speed;
+                if(newtop <= 60){
+                    newtop = 60;
+                    inp.value = "碰壁了！！";
+                }
+                box1.style.top = newtop + "px";
+                break;
+            case 39:
+                inp.value = "不允许输入数字";
+                var left = parseInt(getStyle(box1,"left"));
+                var newleft = left + speed;
+                if(newleft >= 1700){
+                    newleft = 1700;
+                    inp.value = "碰壁了！！";
+                }
+                box1.style.left = newleft + "px";
+                break;
+            case 40:
+                inp.value = "不允许输入数字";
+                var top = parseInt(getStyle(box1,"top"));
+                var newtop = top + speed;
+                if(newtop >= 710){
+                    newtop = 710;
+                    inp.value = "碰壁了！！";
+                }
+                box1.style.top = newtop + "px";
+                break;
+            }
+        },30);
+        
+        document.onkeydown = function(event){
+            event = event || window.event;
+            if(event.ctrlKey){
+                speed = 50;
+            }else{
+                speed = 10;
+            }
+            dir = event.keyCode;
+        };
+        document.onkeyup = function(){
+            dir = 0;
+        };
+    </script>
+</body>
+</html>
